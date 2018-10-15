@@ -40,7 +40,7 @@ public:
 	CAdditional();
 	~CAdditional();
 private:
-	m_Name;
+	string m_Name;
 	
 };
 #endif

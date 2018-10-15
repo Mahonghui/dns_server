@@ -21,7 +21,7 @@ void CAnswer::setAnswerSection(string& name, string& type, string& Class, unsign
 	// set fixed value
 	m_RR.setTTL(0);
 	m_RR.setRdLength(4);
-
+	// transform to str, interim byte
 	addr_str = (addr>>24) & 0xff;
 	addr_str += (addr >> 16) & 0xff;
 	addr_str += (addr >> 8) & 0xff;

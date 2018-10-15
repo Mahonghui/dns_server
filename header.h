@@ -64,4 +64,5 @@ private:
 	string m_AllCounts;
 
 };
+#endif
 
