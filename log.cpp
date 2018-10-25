@@ -7,7 +7,7 @@
 #include <iomanip>
 
 // Constructor & Deconstructor
-CLog::CLog(char* logFile):m_Fs(logFile, ios::out|ios::binary){}
+CLog::CLog(const char* logFile):m_Fs(logFile, ios::out|ios::binary){}
 CLog::~CLog(){}
 
 void CLog::printString(string outString)

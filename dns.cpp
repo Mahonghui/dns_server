@@ -5,7 +5,7 @@
 #include "dns.h"
 #include <iostream>
 #include <sys/socket.h>
-#include <sys/types>
+#include <sys/types.h>
 #include <arpa/inet.h>
 #include <sstream>
 #include <cstdlib>
@@ -42,7 +42,7 @@ void CDns::openCommunication()
 	length = sizeof(server_address);
 	memset(&server_address, 0, length);
 	server_address.sin_family = AF_INET;
-	server_address.sin_address.s_addr = htonl(INADDR_ANY);
+	server_address.sin_addr.s_addr = htonl(INADDR_ANY);
 	server_address.sin_port = htons(DNS_PORT);
 
 	if(bind(m_socket, (struct sockaddr*)&server_address, length)<0)
@@ -74,9 +74,8 @@ void CDns::readMessage()
 	{
 		cerr<<"Error receiving from "<<m_socket<<" socket"<<endl;
 		exit(0);
-	})
-
-	string received_msg((const char*) buff, n);
+	}
+	string received_msg((const char*)&buff, n);
 	parseMessage(received_msg, (unsigned int) n);
 }
 
@@ -87,7 +86,7 @@ void CDns::parseMessage(string& msg, unsigned int n)
 
 	ostringstream s;
 	s<<DNS_PORT;
-	m_log.printString("Message receive from port: "+ s.c_str() + ". ");
+	m_log.printString("Message receive from port: "+ s.str() + ". ");//s.str returns C-style string
 	m_log.printString("message: ");
 	m_log.printFormattedString(msg);
 
@@ -111,7 +110,7 @@ void CDns::hostLookup(string& msg)
 	string hostname;
 
 	hostname = m_message->getHost();
-	addr.s_addr = m_db.getAddress(hostname);
+	addr.s_addr = m_db.getAddress((const char*)hostname.c_str());
 	saddr = htonl(addr.s_addr);
 
 	m_error = m_message->setAnswer(saddr);
@@ -131,7 +130,7 @@ void CDns::buildMessage(string& msg)
 	{
 		msg += m_message->getAnswer();
 		msg += m_message->getAuthority();
-		msg += m_message->getAddtional();	
+		msg += m_message->getAdditional();	
 	}
 	sendMessage(msg);
 }
@@ -141,10 +140,10 @@ void CDns::sendMessage(string& msg)
 	int r;
 	socklen_t len = sizeof(struct sockaddr_in);
 
-	n = send(m_socket, msg.c_str(), msg.size(), 0, (struct sockaddr*)&m_clientaddr, len);
-	if(n<0)
+	r = sendto(m_socket, msg.c_str(), msg.size(), 0, (struct sockaddr*)&m_clientaddr, len);
+	if(r<0)
 	{
-		cerr<<"Error sending to "<<m_clientaddr<<" socket."<<endl;
+		cerr<<"Error sending to "<<m_socket<<" socket."<<endl;
 		exit(0);
 	}
 	

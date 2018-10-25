@@ -17,7 +17,7 @@ using namespace std;
 class CLog
 {
 public:
-	CLog(char* logFile);
+	CLog(const char* logFile);
 	~CLog();
 
 	// print a string into logfile

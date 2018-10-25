@@ -1,15 +1,15 @@
 /*
 	brief: define dns server workflow
 */
-using namespace std;
+
 
 #ifndef _DNS_H
 #define _DNS_H
 
-#include "log"
+#include "log.h"
 #include "message.h"
 #include "dnsDB.cpp"
-
+using namespace std;
 class CDns
 {
 public:
