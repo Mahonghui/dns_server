@@ -1,5 +1,3 @@
-using namespace std;
-
 
 /*
 	brief: dns header definition
@@ -26,6 +24,7 @@ using namespace std;
 #define _HEADER_H
 
 #include <string>
+using namespace std;
 
 class CHeader
 {

@@ -7,22 +7,23 @@
 #include <iomanip>
 
 // Constructor & Deconstructor
-CLog::CLog(char* logFile):m_Fs(outFile, ios::out||ios::binary){}
-CLog::~CLog()
+CLog::CLog(char* logFile):m_Fs(logFile, ios::out|ios::binary){}
+CLog::~CLog(){}
 
-void CLog::prinString(string outString)
+void CLog::printString(string outString)
 {
 	m_Fs<<outString<<endl;
 }
 
 void CLog::printFormattedString(string& outString)
 {
+	// stack overflow
 	char s[3];
 
 	for(unsigned int i = 0; i<outString.size(); i++)
 	{
 		sprintf(s, "%.2x", (unsigned char)outString[i]);
-		m_Fs<<"["<<hex<< s<<"]";
+		m_Fs<<"["<<hex<<s<<"]";
 	}
 	m_Fs<<dec<<" - "<<outString.size() << " bytes"<<endl;
 }
@@ -36,8 +37,7 @@ void CLog::printError(string outString, CHeader::TRCode error_code)
 		case CHeader::SERVER_FAILURE:
 			error = "SERVER FAILURE";
 			break;
-
-		case)CHeader::FORMAT_ERROR:
+		case CHeader::FORMAT_ERROR:
 			error = "FORMAT ERROR";
 			break;
 		case CHeader::REFUSED:

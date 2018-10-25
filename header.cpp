@@ -15,7 +15,7 @@ CHeader::CHeader(): m_OpCodePart(0),m_RCode(NO_ERROR),
 
 // Deconstructor
 
-CHeader:~CHeader()
+CHeader::~CHeader()
 {
 
 }
@@ -39,7 +39,7 @@ CHeader::TRCode CHeader::setOpCodePart(unsigned char c)
 	// only receive standard query
 	if(tc != 0)return NOT_IMPLEMENTED;
 
-	return NO_ERROR;
+	return CHeader::NO_ERROR;
 }
 
 unsigned char CHeader::getOpCodePart()
@@ -59,18 +59,18 @@ unsigned char CHeader::getRCode()
 	return (char)m_RCode;
 }
 
-CHeader::TRCode setAllCounts(string& buff)
+CHeader::TRCode CHeader::setAllCounts(string& buff)
 {
 	m_AllCounts = buff;
 
 	m_QdCount = (buff[0]<<8) + buff[1];
 
 	if(m_QdCount == 0)
-		return FORMAT_ERROR;
+		return CHeader::FORMAT_ERROR;
 	if(m_QdCount > 1)
-		return NOT_IMPLEMENTED;
+		return CHeader::NOT_IMPLEMENTED;
 
-	return NO_ERROR;
+	return CHeader::NO_ERROR;
 }
 
 string& CHeader::getAllCounts()
@@ -92,6 +92,3 @@ void CHeader::setAnCount(unsigned int anCount)
 {
 	m_AnCount = anCount;
 }
-
-}
-

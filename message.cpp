@@ -25,13 +25,13 @@ CMessage::CMessage(CLog& log)
 			m_answer(),
 			m_authority(),
 			m_addtional(),
-			m_host(),
+			host(),
 			m_answerString(),
 			m_authorityString(),
 			m_addtionalString(),
 			m_log(log)
 {}
-CMessage::~CMessage()
+CMessage::~CMessage(){}
 
 bool CMessage::setHeader(string& header)
 {
@@ -39,19 +39,19 @@ bool CMessage::setHeader(string& header)
 	bool error = false;
 	CHeader::TRCode error_code;
 
-	error_code = m_Header.setOpCodePart(header[2]);
+	error_code = m_header.setOpCodePart(header[2]);
 	if(error_code != (CHeader::NO_ERROR))
 	{
 		m_log.printError("setHeader: error code returned: ", error_code);
 		setErrorCode(error_code);
 		error = true;
 	}
-	m_Header.setOpCodePart(Header[3]);
+	m_header.setOpCodePart(header[3]);
 
 	string params = header.substr(4, 8);
-	qd_count = m_Header.setAllCounts(params);
+	qd_count = m_header.setAllCounts(params);
 
-	error_code = m_Header.setOpCodePart(header[2]);
+	error_code = m_header.setOpCodePart(header[2]);
 	if(error_code != (CHeader::NO_ERROR))
 	{
 		m_log.printError("setHeader: error code returned: ", error_code);
@@ -65,9 +65,9 @@ bool CMessage::setHeader(string& header)
 void CMessage::getHeader(string& header)
 {
 	string buff;
-	buff = m_Header.getOpCodePart();
-	buff += m_Header.getRCode();
-	buff += m_Header.getAllCounts();
+	buff = m_header.getOpCodePart();
+	buff += m_header.getRCode();
+	buff += m_header.getAllCounts();
 
 	header.replace(2, 10, buff);
 }
@@ -84,16 +84,16 @@ bool CMessage::setQuestion(string& question, unsigned int qlen)
 	qname = question.substr(0, index-1);
 
 	//clean m_host filed
-	m_host.erase(0, m_host.size());
+	host.erase(0, host.size());
 	// extract hostname from question name 
 	// to look for correspoding ip addr within db
 	unsigned int i=0;
 	while(i<qname.size())
 	{
 		len = qname.at(i);
-		m_host += qname.substr(i+1, len);
+		host += qname.substr(i+1, len);
 		i += (len+1);
-		if(i<qname.size()) m_host += '.';
+		if(i<qname.size()) host += '.';
 	}
 
 	// qname terminated with null
@@ -124,17 +124,17 @@ bool CMessage::setQuestion(string& question, unsigned int qlen)
 
 string& CMessage::getHost()
 {
-	return m_host;
+	return host;
 }
 
-bool CMessage::setAnswer(unsigned int addr)
+bool CMessage::setAnswer(long unsigned addr)
 {
 	bool error = false;
 
 	if(addr != 0)
 	{
 		m_header.setAnCount(1); // indicate there is only one answer
-		m_answer.setAnswerSection(m_question.getQName(), m_question.getQtype(), m_question.getQClass(), addr);
+		m_answer.setAnswerSection(m_question.getQName(), m_question.getQType(), m_question.getQClass(), addr);
 	}
 	else
 	{

@@ -17,7 +17,7 @@
     +---------------------+
     last two segments remained for future improvement.
 */
-using namespace std;
+
 
 #ifndef _MESSAGE_H
 #define _MESSAGE_H
@@ -26,7 +26,7 @@ using namespace std;
 #include "question.h"
 #include "answer.h"
 #include "log.h"
-
+using namespace std;
 class CMessage
 {
 public:

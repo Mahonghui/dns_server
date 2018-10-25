@@ -4,15 +4,16 @@
 	which can be specified by a parameter, or a default option
 	would be used.
 */
-using namespace std;
+
 
 #ifndef _LOG_H
 #define _LOG_H
 
 #include "header.h"
-#include<string>
-#include<fstream>
+#include <string>
+#include <fstream>
 
+using namespace std;
 class CLog
 {
 public:
