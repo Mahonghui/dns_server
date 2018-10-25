@@ -7,7 +7,7 @@
 #include <iostream>
 
 // constructor & deconstructor
-CQuestion::CQuestion():m_QName(),m_QType(), m_QClass{}
+CQuestion::CQuestion():m_QName(),m_QType(), m_QClass(){}
 CQuestion::~CQuestion(){}
 
 void CQuestion::setQName(string& name)
@@ -21,7 +21,7 @@ string& CQuestion::getQName()
 	return m_QName;
 }
 
-void CQuestion::setQType(string& type)
+bool CQuestion::setQType(string& type)
 {
 	unsigned int value;
 	bool error = false;
@@ -57,7 +57,7 @@ bool CQuestion::setQClass(string& Class)
 	m_QClass.erase(0, m_QClass.size());
 	m_QClass = Class;
 
-	value = (Class<<8) + Class[1];
+	value = (Class[0]<<8) + Class[1];
 	// accept A || ANY
 	error = ((CResourceRecord::TQClass)value == CResourceRecord::CH);
 	return error;

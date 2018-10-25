@@ -6,10 +6,9 @@
 #include <iostream>
 
 // Constructor
-CResourceRecord::CResourceRecord():m_Name(), m_Type(),m_Class(), m_Type(), 
+CResourceRecord::CResourceRecord():m_Name(), m_Class(), m_Type(), 
 									m_TTL(),m_RdLength(), m_RData()
 {}
-}
 // Deconstructor
 CResourceRecord::~CResourceRecord()
 {}

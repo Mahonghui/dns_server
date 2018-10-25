@@ -1,9 +1,7 @@
 /*
   brief:  dns database implement 
 */
-*/
-
-#include "dnsDb.h"
+#include "dnsDB.h"
 
 #include <iostream>
 #include <string>
@@ -13,10 +11,10 @@
 #include <cstring>
 
 // Constructor&deconstructor
-CDnsDb::CDnsDB()
+CDnsDB::CDnsDB()
   : m_db(){}
 
-CDnsDb::~CDnsDB(){}
+CDnsDB::~CDnsDB(){}
 
 // Reads the config file given as parameter. 
 bool CDnsDB::readfile(const char* filename) 

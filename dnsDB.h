@@ -2,14 +2,14 @@
 	brief: dns database
 */
 
-using namespace std;
+
 
 #ifndef _DNSDB_H
 #define _DNSDB_H
 
 #include <cstring>
 #include <map>
-
+using namespace std;
 /*
 	class CDnsDB reads a files that contains pairs of hostname-ip entries.
 	if not specified via command line parameter, it will use default.
@@ -37,7 +37,7 @@ private:
 	class less_string
 	{
 	public:
-		bool operator(const char* s1, const char* s2)
+		bool operator()(const char* s1, const char* s2) const
 		{
 			return strcmp(s1, s2)<0;
 		}
@@ -45,5 +45,6 @@ private:
 	// parse line within file
 	void parseLine(char* line);
 
-	std::map<const char*, unsigned long int, less_string> m_db;)
+	std::map<const char*, unsigned long int, less_string> m_db;
 };
+#endif

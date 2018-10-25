@@ -16,7 +16,7 @@ public:
 	~CQuestion();
 	
 	void setQName(string& name);
-	sring& getQName();
+	string& getQName();
 
 	bool setQType(string& type);
 	string& getQType();

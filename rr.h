@@ -1,4 +1,4 @@
-using namespace std;
+
 
 /*
 
@@ -9,7 +9,7 @@ using namespace std;
 #define _RR_H
 
 #include <string>
-
+using namespace std;
 class CResourceRecord
 {
 public:
@@ -26,10 +26,10 @@ public:
 	string& getClass();
 
 	void setTTL(unsigned int ttl);
-	unsigned int getTTL();
+	string& getTTL();
 
 	void setRdLength(unsigned int Rdlength);
-	unsigned int getRdLength();
+	string& getRdLength();
 
 	void setRData(string& rddata);
 	string& getRData();
@@ -44,7 +44,7 @@ public:
 		SOA  = 6,
 		MB  = 7,
 		MG  = 8,
-		NLL = 10，
+		NLL = 10,
 		WKS = 11,
 		PTR = 12,
 		HINFO = 13,
@@ -53,7 +53,7 @@ public:
 		TXT = 16,
 		AXFR = 252,
 		MAILB = 253,
-		MAILB = 254,
+		MAILA = 254,
 		ALL  = 255
 	};
 

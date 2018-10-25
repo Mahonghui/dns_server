@@ -47,7 +47,7 @@ string& CAnswer::getAnswerSection()
 
 
 // TRIVAL INIT WORK
-CAuthority::CAuthority():m_Name{}
+CAuthority::CAuthority():m_Name(){}
 CAuthority::~CAuthority(){}
 
 CAdditional::CAdditional():m_Name(){}
