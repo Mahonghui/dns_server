@@ -2,7 +2,6 @@
 	brief: define dns server workflow
 */
 
-
 #ifndef _DNS_H
 #define _DNS_H
 
